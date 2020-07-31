@@ -1,0 +1,25 @@
+{
+  "cars": [
+    {
+      "id": 0,
+      "reg": "CJ15SOZ",
+      "brand": "Volkswagen",
+      "hp": 130,
+      "kms": 88000
+    },
+    {
+      "id": 1,
+      "reg": "CJ16SBB",
+      "brand": "Chevrolet",
+      "hp": 99,
+      "kms": 135000
+    },
+    {
+      "id": 2,
+      "reg": "CJ11PZD",
+      "brand": "Ford",
+      "hp": 123,
+      "kms": 56000
+    }
+  ]
+}

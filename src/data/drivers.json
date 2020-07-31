@@ -1,0 +1,19 @@
+{
+  "drivers": [
+    {
+      "name": "Marcel",
+      "age": 25,
+      "car_id": 0
+    },
+    {
+      "name": "Raul",
+      "age": 32,
+      "car_id": 1
+    },
+    {
+      "name": "Andreea",
+      "age": 88845,
+      "car_id": 2
+    }
+  ]
+}
