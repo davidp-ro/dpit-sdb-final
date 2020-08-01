@@ -3,12 +3,15 @@ from models.car import Car
 from models.driver import Driver
 
 
-def return_right_car(car_id: int, car_instance_list: list) -> Car:
+def return_right_car(car_id: int, car_instance_list: list) -> Car or None:
+    if car_id is -1:
+        return None
+    
     for car_ in car_instance_list:
         if car_.id is car_id:
             return car_
 
-    return "not_found"
+    return None
 
 
 def import_data(car_instance_list: list, driver_instance_list: list) -> None:
@@ -35,5 +38,5 @@ def import_data(car_instance_list: list, driver_instance_list: list) -> None:
                     driver_["id"],
                     driver_["name"],
                     driver_["age"],
-                    car_for_driver if car_for_driver is not "not_found" else None)
+                    car_for_driver)
             )
