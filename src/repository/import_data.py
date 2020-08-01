@@ -32,6 +32,7 @@ def import_data(car_instance_list: list, driver_instance_list: list) -> None:
 
             driver_instance_list.append(
                 Driver(
+                    driver_["id"],
                     driver_["name"],
                     driver_["age"],
                     car_for_driver if car_for_driver is not "not_found" else None)

@@ -18,13 +18,15 @@ def main():
     import_data(car_instance_list, driver_instance_list)
 
     # Begin showing menu
-    from ui.console_menu import menu
-    menu()
+    from ui.console_menu import Menu
+    menu = Menu(car_instance_list, driver_instance_list)
+    menu.show_menu()
 
 
 if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
+        # Just in case we get a ctrl-c
         from ui.console_messages import stop
         stop()
