@@ -13,7 +13,7 @@ class Repo:
 
         Args:
             instance_list (list): The instance list
-            mode (str, optional): "all" or "single". Defaults to "all".
+            mode (str, optional): "all", "single" or "last". Defaults to "all".
             entity_id (int, optional): If mode was "single" then provide the entities id. Defaults to None.
 
         Returns:
@@ -32,9 +32,13 @@ class Repo:
                 return ("not_found", None)
             else:
                 warning("In single mode, entity_id must not be None")
-                return ("failed", None)           
+                return ("failed", None)
+        elif mode is "last":
+            if len(self.instance_list) is 0:
+                return ("not_found", None)
+            return ("found", self.instance_list[-1])
         else:
-            warning("Invalid mode! Available modes: \"all\"(default) or \"single\"")
+            warning("Invalid mode! Available modes: \"all\"(default), \"single\" or \"last\"")
             return ("failed", None)
 
 

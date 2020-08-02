@@ -3,6 +3,9 @@ from terminaltables import SingleTable
 import ui.console_utils as console
 from repository.repo import Repo
 import ui.one_line_table as olt
+from utils.input_checker import Parser
+from services import add, update, remove
+
 
 class Handler:
     car_instance_list = []
@@ -91,23 +94,73 @@ class Handler:
                 message="Please try again"
                 )
     
+
     def add_driver(self):
-        pass
+        console.clear_console()
+        olt.show(
+            title="Add a driver",
+            message="To add a new driver just complete all the details below",
+            go_back=False
+        )
+        driver_repo = Repo(self.driver_instance_list)
+        parser = Parser(driver_repo)
+        add.handle_add_driver(driver_repo, parser)
+
 
     def add_car(self):
-        pass
+        console.clear_console()
+        olt.show(
+            title="Add a car",
+            message="To add a new car just complete all the details below",
+            go_back=False
+        )
+        car_repo = Repo(self.car_instance_list)
+        parser = Parser(car_repo)
+        add.handle_add_car(car_repo, parser)
 
     def remove_driver(self):
-        pass
+        console.clear_console()
+        olt.show(
+            title="Remove a driver",
+            message="To remove a driver please complete the details below",
+            go_back=False
+        )
+        driver_repo = Repo(self.driver_instance_list)
+        parser = Parser(driver_repo)
+        remove.handle_remove_driver(driver_repo, parser)
 
     def remove_car(self):
-        pass
+        console.clear_console()
+        olt.show(
+            title="Remove a car",
+            message="To remove a car please complete the details below",
+            go_back=False
+        )
+        car_repo = Repo(self.car_instance_list)
+        parser = Parser(car_repo)
+        remove.handle_remove_car(car_repo, parser)
 
     def update_driver(self):
-        pass
+        console.clear_console()
+        olt.show(
+            title="Update a driver",
+            message="To update a driver just complete all the details below",
+            go_back=False
+        )
+        driver_repo = Repo(self.driver_instance_list)
+        parser = Parser(driver_repo)
+        update.handle_update_driver(driver_repo, parser)
 
     def update_car(self):
-        pass
+        console.clear_console()
+        olt.show(
+            title="Update a car",
+            message="To update a car just complete all the details below",
+            go_back=False
+        )
+        car_repo = Repo(self.car_instance_list)
+        parser = Parser(car_repo)
+        update.handle_update_car(car_repo, parser)
 
     def show_statistics_menu(self):
         pass
