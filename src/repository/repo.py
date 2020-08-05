@@ -12,7 +12,6 @@ class Repo:
         Get one or all(default) instance(s)
 
         Args:
-            instance_list (list): The instance list
             mode (str, optional): "all", "single" or "last". Defaults to "all".
             entity_id (int, optional): If mode was "single" then provide the entities id. Defaults to None.
 
@@ -44,10 +43,9 @@ class Repo:
 
     def add(self, entity: object) -> tuple:
         """
-        Add an entity to it's respective list
+        Add an entity
 
         Args:
-            instance_list (list): The list that contains instances of the entity
             entity (Car/Driver): The entity itself
 
         Example:
@@ -74,42 +72,84 @@ class Repo:
             return ("fail", "Something went wrong")
 
 
-    def delete(self, entity: object) -> tuple:
+    def delete(self, entity_id: int) -> tuple:
         """
-        Deletes an entity from it's respective list
+        Deletes an entity
 
         Args:
-            instance_list (list): The list that contains instances of the entity
             entity (Car/Driver): The entity itself
 
         Example:
-            delete(car_instance_list, Car(...)) will return:
+            delete(1) will return:
                 ("ok", "Deleted succesfully") If the entity was succesfully deleted
-                ("warn", "This was already deleted") If the entity was already deleted
+                ("warn", "Not found, maybe already deleted") Self-explanatory
                 ("fail", "Something went wrong") If something failed
 
         Returns:
             tuple: (response, message), ie: ("ok", "Deleted succesfully")
         """
-        pass
+        resp, entity = self.get(mode="single", entity_id=int(entity_id))
+        if resp is "found":
+            self.instance_list.remove(entity)
+            return ("ok", "Deleted succesfully")
+        else:
+            return ("warn", "Not found, maybe already deleted")
 
 
-    def update(self, old_entity_id: int, new_entity: object) -> tuple:
+    def update(self, type_of_entity: str, entity_id: int, **kwargs) -> tuple:
         """
-        Update an entity from it's respective list
+        Update an entity
 
         Args:
-            instance_list (list): The list that contains instances of the entity
-            old_entity_id (int): The entity that gets updated's id
-            new_entity (Car/Driver): The updated entity
+            type_of_entity (str): "car" / "driver"
+            old_entity_id (int): The id of the entity that will get updated
+            kwargs: Properties to update for each entity
 
-        Example:
-            update(car_instance_list, 1, Car(...)) will return:
-                ("ok", "Updated succesfully") If the entity was succesfully added
-                ("fail", "Initial instance not found") If old_entity dosen't exist
-                ("fail", "Something went wrong") If something failed
+        Raises:
+            AttributeError: if given argument is incorrect
 
         Returns:
-            tuple: (response, message), ie: ("ok", "Added succesfully")
+            tuple: (response, message), ie: ("ok", "Updated succesfully")
+
+        Example:
+            update(
+                type_of_entity="car",
+                entity_id=2,
+                brand="New brand",
+                kms=123456
+            ) -> Will update the id, brand and kms for the entity that *had* entity_id
         """
-        pass
+        if type_of_entity is "car":
+            resp, entity = self.get(mode="single", entity_id=entity_id)
+            if resp is "found":
+                # Update each given (kwargs) property
+                if "id" in kwargs and kwargs["id"] is not None:
+                    entity.id = kwargs["id"]
+                if "reg" in kwargs and kwargs["reg"] is not None:
+                    entity.reg = kwargs["reg"]
+                if "brand" in kwargs and kwargs["brand"] is not None:
+                    entity.brand = kwargs["brand"]
+                if "hp" in kwargs and kwargs["hp"] is not None:
+                    entity.hp = kwargs["hp"]
+                if "kms" in kwargs and kwargs["kms"] is not None:
+                    entity.kms = kwargs["kms"]
+                return ("ok", "Updated succesfully")
+            else:
+                return ("fail", "Not found")
+        elif type_of_entity is "driver":
+            resp, entity = self.get(mode="single", entity_id=entity_id)
+            if resp is "found":
+                # Update each given (kwargs) property
+                if "id" in kwargs and kwargs["id"] is not None:
+                    entity.id = kwargs["id"]
+                if "name" in kwargs and kwargs["name"] is not None:
+                    entity.name = kwargs["name"]
+                if "age" in kwargs and kwargs["age"] is not None:
+                    entity.age = kwargs["age"]
+                if "car" in kwargs and kwargs["car"] is not None:
+                    entity.car = kwargs["car"]
+                return ("ok", "Updated succesfully")
+            else:
+                return ("fail", "Not found")
+        else:
+            raise AttributeError("Invalid entity type!")

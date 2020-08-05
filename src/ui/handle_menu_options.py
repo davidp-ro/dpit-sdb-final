@@ -1,8 +1,9 @@
 import os
 from terminaltables import SingleTable
-import ui.console_utils as console
 from repository.repo import Repo
+import ui.console_utils as console
 import ui.one_line_table as olt
+from ui.statistics_menu import StatisticsMenu
 from utils.input_checker import Parser
 from services import add, update, remove
 
@@ -62,9 +63,6 @@ class Handler:
             table_data = [["ID", "Registration", "Brand", "HP", "KMs"]]
             for car in car_list:
                 table_data.append([str(car.id), car.reg, car.brand, str(car.hp), str(car.kms)])
-                # car_ = driver.car
-                # car_data = f"{car_.brand} with reg: {car_.reg}" if car_ is not None else "Driver does not have a car asociatted"
-                # table_data.append([str(driver.id), driver.name, str(driver.age), car_data])
 
             car_table = SingleTable(table_data, title="Cars")
             car_table.justify_columns = {
@@ -104,7 +102,8 @@ class Handler:
         )
         driver_repo = Repo(self.driver_instance_list)
         parser = Parser(driver_repo)
-        add.handle_add_driver(driver_repo, parser)
+        car_repo = Repo(self.car_instance_list)
+        add.handle_add_driver(driver_repo, parser, car_repo)
 
 
     def add_car(self):
@@ -149,7 +148,8 @@ class Handler:
         )
         driver_repo = Repo(self.driver_instance_list)
         parser = Parser(driver_repo)
-        update.handle_update_driver(driver_repo, parser)
+        car_repo = Repo(self.car_instance_list)
+        update.handle_update_driver(driver_repo, parser, car_repo)
 
     def update_car(self):
         console.clear_console()
@@ -163,7 +163,11 @@ class Handler:
         update.handle_update_car(car_repo, parser)
 
     def show_statistics_menu(self):
-        pass
+        statisticsMenu = StatisticsMenu(
+            self.car_instance_list,
+            self.driver_instance_list
+        )
+        statisticsMenu.show()
 
     def show_about(self):
         olt.show(
