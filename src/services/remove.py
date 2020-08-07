@@ -6,13 +6,20 @@ import ui.console_utils as console
 import ui.one_line_table as olt
 
 def handle_remove_driver(driver_repo: Repo, parser: Parser):
+    """
+    Handle removing a driver
+
+    Args:
+        driver_repo (Repo): Driver repository
+        parser (Parser): Input parser
+    """
     # Get driver id:
     done_id = False
     _, driver_list = driver_repo.get()
 
     while not done_id:
         id_ = input("Enter driver id (numeric) or leave blank to see the driver list > ")
-        if id_ is "":
+        if id_ == "":
             table_data = [["ID", "Name"]]
             for driver in driver_list:
                 table_data.append([str(driver.id), driver.name])
@@ -64,13 +71,21 @@ def handle_remove_driver(driver_repo: Repo, parser: Parser):
                 )
 
 def handle_remove_car(car_repo: Repo, parser: Parser):
+    """
+    Handle removing a car
+
+    Args:
+        car_repo (Repo): Car repository
+        parser (Parser): Input parser
+    """
+
     # Get car id:
     done_id = False
     _, car_list = car_repo.get()
 
     while not done_id:
         id_ = input("Enter car id (numeric) or leave blank to see the car list > ")
-        if id_ is "":
+        if id_ == "":
             table_data = [["ID", "Registration"]]
             for car in car_list:
                 table_data.append([str(car.id), car.reg])

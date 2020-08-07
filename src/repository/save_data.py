@@ -19,22 +19,22 @@ def save_data(mode: str = "complete", only: str = None, car_instance_list: list 
         save_data(only="cars", car_instance_list=car_ent_list) -> Will save from scratch, but only the cars
         save_data(mode="single", only="drivers", driver_instance_list=driver_ent_list) -> Will ONLY save the elements from the given entity_type 
     """
-    if mode is "complete":
+    if mode == "complete":
         # Complete mode:
         if car_instance_list is not None and driver_instance_list is not None:
             proccess_save_all(car_instance_list, driver_instance_list)
         else:
             # Wrong argument
             raise ValueError("In complete mode, both drivers and cars instance list must pe given as an argument (defaults to None)")
-    elif mode is "single":
+    elif mode == "single":
         # Append mode:
-        if only is "cars":
+        if only == "cars":
             if car_instance_list is not None:
                 proccess_save_car(car_instance_list)
             else:
                 # Wrong argument
                 raise ValueError("The car_instance_list must not be None")
-        elif only is "drivers":
+        elif only == "drivers":
             if driver_instance_list is not None:
                 proccess_save_driver(driver_instance_list)
             else:

@@ -1,13 +1,23 @@
-# David Pescariu ~ Aug 2020
-# Final Project - SDB
-#
-# See README for details
+"""
+---------------------------------------------------------
+    Entry point for the car/driver management app/project
+  for the final task @ SDB - DPIT 2020
+
+    See README for more details
+---------------------------------------------------------
+"""
+__author__ = 'David Pescariu'
+__version__ = '1.0'
 
 
 def main():
     # Show start message
     from ui.console_messages import start
     start()
+
+    # Check dependencies
+    from utils.check_deps import check_imports
+    check_imports()
 
     # Initailize our instance lists
     car_instance_list = []
@@ -30,3 +40,8 @@ if __name__ == "__main__":
         # Just in case we get a ctrl-c
         from ui.console_messages import stop
         stop()
+
+
+"""
+David Pescariu | August 2020 | MIT License | https://github.com/davidp-ro
+"""

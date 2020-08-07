@@ -21,19 +21,19 @@ class Repo:
                 list or object: List if mode was "all", Car/Driver if mode was "single"
             )
         """
-        if mode is "all":
+        if mode == "all":
             return ("found", self.instance_list)
-        elif mode is "single":
+        elif mode == "single":
             if entity_id is not None:
                 for instance in self.instance_list:
-                    if instance.id is entity_id:
+                    if instance.id == entity_id:
                         return ("found", instance)
                 return ("not_found", None)
             else:
                 warning("In single mode, entity_id must not be None")
                 return ("failed", None)
-        elif mode is "last":
-            if len(self.instance_list) is 0:
+        elif mode == "last":
+            if len(self.instance_list) == 0:
                 return ("not_found", None)
             return ("found", self.instance_list[-1])
         else:
@@ -59,10 +59,10 @@ class Repo:
         """
         try:
             response, _ = self.get("single", entity.id)
-            if response is "not_found":
+            if response == "not_found":
                 self.instance_list.append(entity)
                 return ("ok", "Added succesfully")
-            elif response is "found":
+            elif response == "found":
                 return ("warn", "This already exists")
             else:
                 fail("Fail in repo::get")
@@ -89,7 +89,7 @@ class Repo:
             tuple: (response, message), ie: ("ok", "Deleted succesfully")
         """
         resp, entity = self.get(mode="single", entity_id=int(entity_id))
-        if resp is "found":
+        if resp == "found":
             self.instance_list.remove(entity)
             return ("ok", "Deleted succesfully")
         else:
@@ -119,9 +119,9 @@ class Repo:
                 kms=123456
             ) -> Will update the id, brand and kms for the entity that *had* entity_id
         """
-        if type_of_entity is "car":
+        if type_of_entity == "car":
             resp, entity = self.get(mode="single", entity_id=entity_id)
-            if resp is "found":
+            if resp == "found":
                 # Update each given (kwargs) property
                 if "id" in kwargs and kwargs["id"] is not None:
                     entity.id = kwargs["id"]
@@ -136,9 +136,9 @@ class Repo:
                 return ("ok", "Updated succesfully")
             else:
                 return ("fail", "Not found")
-        elif type_of_entity is "driver":
+        elif type_of_entity == "driver":
             resp, entity = self.get(mode="single", entity_id=entity_id)
-            if resp is "found":
+            if resp == "found":
                 # Update each given (kwargs) property
                 if "id" in kwargs and kwargs["id"] is not None:
                     entity.id = kwargs["id"]
@@ -147,7 +147,10 @@ class Repo:
                 if "age" in kwargs and kwargs["age"] is not None:
                     entity.age = kwargs["age"]
                 if "car" in kwargs and kwargs["car"] is not None:
-                    entity.car = kwargs["car"]
+                    if kwargs["car"] == -1:
+                        entity.car = None
+                    else:
+                        entity.car = kwargs["car"]
                 return ("ok", "Updated succesfully")
             else:
                 return ("fail", "Not found")

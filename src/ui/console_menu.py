@@ -28,7 +28,7 @@ class Menu:
             ["8", "Update a car"],
             ["9", "Statistics"],
             ["a", "About"],
-            ["e","Exit"],
+            ["e", "Exit"],
         ]
 
         self.options = {
@@ -54,7 +54,7 @@ class Menu:
             }
             print(option_table.table)
             selected = input("> ")
-            if selected is "e":
+            if selected == "e":
                 stop()
                 quit()
             else:

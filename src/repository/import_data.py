@@ -4,11 +4,11 @@ from models.driver import Driver
 
 
 def return_right_car(car_id: int, car_instance_list: list) -> Car or None:
-    if car_id is -1:
+    if car_id == -1:
         return None
     
     for car_ in car_instance_list:
-        if car_.id is car_id:
+        if car_.id == car_id:
             return car_
 
     return None

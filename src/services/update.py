@@ -6,13 +6,22 @@ import ui.console_utils as console
 import ui.one_line_table as olt
 
 def handle_update_driver(driver_repo: Repo, parser: Parser, car_repo: Repo):
+    """
+    Handle updateing a driver
+
+    Args:
+        driver_repo (Repo): Driver repository
+        parser (Parser): Input data parser
+        car_repo (Repo): Car repository
+    """
+
     # Get driver id:
     got_id = False
     _, driver_list = driver_repo.get()
 
     while not got_id:
         id_ = input("Enter driver id (numeric) or leave blank to see the driver list > ")
-        if id_ is "":
+        if id_ == "":
             table_data = [["ID", "Name"]]
             for driver in driver_list:
                 table_data.append([str(driver.id), driver.name])
@@ -39,10 +48,11 @@ def handle_update_driver(driver_repo: Repo, parser: Parser, car_repo: Repo):
                     got_id = True
                     done_id = False
                     done_age = False
+                    #new_car = None
 
                     while not done_id:
                         new_id = input("If you want to change the ID enter it now, leave blank to skip > ")
-                        if new_id is not "":
+                        if new_id != "":
                             try:
                                 new_id = int(new_id)
                                 done_id = True
@@ -58,12 +68,12 @@ def handle_update_driver(driver_repo: Repo, parser: Parser, car_repo: Repo):
                             done_id = True
 
                     new_name = input("If you want to change the Name enter it now, leave blank to skip > ")
-                    if new_name is "":
+                    if new_name == "":
                         new_name = None
 
                     while not done_age:
                         new_age = input("If you want to change the Age enter it now, leave blank to skip > ")
-                        if new_age is not "":
+                        if new_age != "":
                             try:
                                 new_age = int(new_age)
                                 done_age = True
@@ -79,11 +89,11 @@ def handle_update_driver(driver_repo: Repo, parser: Parser, car_repo: Repo):
                             done_age = True
 
                     new_car_yn = input("Do you want to change the driver's car enter \"y\" to change and \"n\" to skip > ").strip().lower()
-                    if ord(new_car_yn) is 121: # Ascii code for y, had weird bug using only 'y'
-                        new_car_id = input("Enter the new car's ID, leave blank to see all cars > ")
-                        if new_car_id is "":
+                    if new_car_yn == 'y':
+                        new_car_id = input("Enter the new car's ID, leave blank to see all cars, or type \"none\" to delete the car from the driver > ").strip().lower()
+                        if new_car_id == "":
                             _, car_list = car_repo.get()
-                            if len(car_list) is 0 or car_list is None:
+                            if len(car_list) == 0 or car_list is None:
                                 olt.show(
                                     title="Something went wrong",
                                     message="Either there are no cars at this moment or something else went wrong"
@@ -127,11 +137,13 @@ def handle_update_driver(driver_repo: Repo, parser: Parser, car_repo: Repo):
                                         message="The car's id must be numeric, discarding car changes",
                                         go_back=False
                                     )
+                        elif new_car_id == "none":
+                            new_car = -1
                         else:
                             try:
                                 new_car_id = int(new_car_id)
                                 resp, car = car_repo.get(mode="single", entity_id=new_car_id)
-                                if resp is "found":
+                                if resp == "found":
                                     new_car = car
                                 else:
                                     olt.show(
@@ -142,7 +154,7 @@ def handle_update_driver(driver_repo: Repo, parser: Parser, car_repo: Repo):
                             except ValueError:
                                 olt.show(
                                     title="Fail",
-                                    message="The car's id must be numeric, discarding car changes",
+                                    message="222The car's id must be numeric, discarding car changes",
                                     go_back=False
                                 )
                     else:
@@ -181,13 +193,21 @@ def handle_update_driver(driver_repo: Repo, parser: Parser, car_repo: Repo):
                 )
 
 def handle_update_car(car_repo: Repo, parser: Parser):
+    """
+    Handle updateing a car
+
+    Args:
+        car_repo (Repo): Car repository
+        parser (Parser): Input parser
+    """
+
     # Get car id:
     got_id = False
     _, car_list = car_repo.get()
 
     while not got_id:
         id_ = input("Enter car id (numeric) or leave blank to see the car list > ")
-        if id_ is "":
+        if id_ == "":
             table_data = [["ID", "Registration"]]
             for car in car_list:
                 table_data.append([str(car.id), car.reg])
@@ -218,7 +238,7 @@ def handle_update_car(car_repo: Repo, parser: Parser):
 
                     while not done_id:
                         new_id = input("If you want to change the ID enter it now, leave blank to skip > ")
-                        if new_id is not "":
+                        if new_id != "":
                             try:
                                 new_id = int(new_id)
                                 done_id = True
@@ -233,16 +253,16 @@ def handle_update_car(car_repo: Repo, parser: Parser):
                             new_id = None
                             done_id = True
                     new_reg = input("If you want to change the Registration No. enter it now, leave blank to skip > ")
-                    if new_reg is "":
+                    if new_reg == "":
                         new_reg = None
 
                     new_brand = input("If you want to change the Brand enter it now, leave blank to skip > ")
-                    if new_brand is "":
+                    if new_brand == "":
                         new_brand = None
 
                     while not done_hp:
                         new_hp = input("If you want to change the Horsepower enter it now, leave blank to skip > ")
-                        if new_hp is not "":
+                        if new_hp != "":
                             try:
                                 new_hp = int(new_hp)
                                 done_hp = True
@@ -259,7 +279,7 @@ def handle_update_car(car_repo: Repo, parser: Parser):
                         
                     while not done_kms:
                         new_kms = input("If you want to change the KMs enter them now, leave blank to skip > ")
-                        if new_kms is not "":
+                        if new_kms != "":
                             try:
                                 new_kms = int(new_kms)
                                 done_kms = True

@@ -20,6 +20,13 @@
       "brand": "Hyundai",
       "hp": 145,
       "kms": 23522
+    },
+    {
+      "id": 3,
+      "reg": "B534JDK",
+      "brand": "Volvo",
+      "hp": 163,
+      "kms": 86322
     }
   ]
 }

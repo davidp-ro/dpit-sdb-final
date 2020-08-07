@@ -8,7 +8,15 @@ from models.car import Car
 from models.driver import Driver
 
 
-def handle_add_driver(driver_repo: Repo, parser: Parser, car_repo: Repo):
+def handle_add_driver(driver_repo: Repo, parser: Parser, car_repo: Repo) -> None:
+    """
+    Handle adding a driver
+
+    Args:
+        driver_repo (Repo): Driver repository
+        parser (Parser): Input data parser
+        car_repo (Repo): Car repository
+    """
     new_id = None
     new_name = ""
     new_age = None
@@ -17,7 +25,7 @@ def handle_add_driver(driver_repo: Repo, parser: Parser, car_repo: Repo):
     done_id = False
     while not done_id:
         id_ = input("Enter driver id (numeric), leave blank for autocomplete > ")
-        if id_ is "":
+        if id_ == "":
             _, last_entity = driver_repo.get(mode="last")
             id_ = last_entity.id
             found = False
@@ -64,9 +72,9 @@ def handle_add_driver(driver_repo: Repo, parser: Parser, car_repo: Repo):
         # Add car:
         print("In order to assign a car to a driver you need it's ID, do you know it, or do you want to see all cars")
         input_ = input("Press enter to see all cars or enter an ID > ")
-        if input_ is "":
+        if input_ == "":
             _, car_list = car_repo.get()
-            if len(car_list) is 0 or car_list is None:
+            if len(car_list) == 0 or car_list is None:
                 olt.show(
                     title="Something went wrong",
                     message="Either there are no cars at this moment or something else went wrong"
@@ -93,14 +101,14 @@ def handle_add_driver(driver_repo: Repo, parser: Parser, car_repo: Repo):
 
                 console.clear_console()
                 input_ = input("Enter car id or \"back\" if you want to leave it blank for now > ")
-                if input_ is "back":
+                if input_ == "back":
                     # Just add driver with no car assigned
                     driver_repo.add(Driver(new_id, new_name, new_age, None))
                 else:
                     try:
                         new_car_id = int(input_)
                         resp, car_ = car_repo.get(mode="single", entity_id=new_car_id)
-                        if resp is "found":
+                        if resp == "found":
                             # Add driver with respective car
                             driver_repo.add(Driver(new_id, new_name, new_age, car_))
                         else:
@@ -120,7 +128,7 @@ def handle_add_driver(driver_repo: Repo, parser: Parser, car_repo: Repo):
             try:
                 new_car_id = int(input_)
                 resp, car_ = car_repo.get(mode="single", entity_id=new_car_id)
-                if resp is "found":
+                if resp == "found":
                     # Add driver with respective car
                     driver_repo.add(Driver(new_id, new_name, new_age, car_))
                 else:
@@ -152,6 +160,13 @@ def handle_add_driver(driver_repo: Repo, parser: Parser, car_repo: Repo):
 
 
 def handle_add_car(car_repo: Repo, parser: Parser):
+    """
+    Handle adding a car
+
+    Args:
+        car_repo (Repo): Car repository
+        parser (Parser): Input parser
+    """
     new_id = None
     new_reg = ""
     new_brand = ""
@@ -162,7 +177,7 @@ def handle_add_car(car_repo: Repo, parser: Parser):
     done_id = False
     while not done_id:
         id_ = input("Enter car id (numeric), leave blank for autocomplete > ")
-        if id_ is "":
+        if id_ == "":
             _, last_entity = car_repo.get(mode="last")
             id_ = last_entity.id
             found = False

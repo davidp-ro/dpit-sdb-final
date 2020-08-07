@@ -9,6 +9,22 @@ from services import add, update, remove
 
 
 class Handler:
+    """
+        This class contains all the handler(printing to the console) functions for 
+    the main menu
+
+    Methods:
+        show_drivers
+        show_cars
+        add_driver
+        add_car
+        remove_driver
+        remove_car
+        update_driver
+        update_car
+        show_statistics_menu
+        show_about
+    """
     car_instance_list = []
     driver_instance_list = []
         
@@ -20,7 +36,7 @@ class Handler:
         driver_repo = Repo(self.driver_instance_list)
         response, driver_list = driver_repo.get(mode="all")
 
-        if response is "found" and len(driver_list) is not 0:
+        if response == "found" and len(driver_list) != 0:
             table_data = [["ID", "Name", "Age", "Car"]]
             for driver in driver_list:
                 car_ = driver.car
@@ -43,7 +59,7 @@ class Handler:
                     break
                 else:
                     continue
-        elif len(driver_list) is 0:
+        elif len(driver_list) == 0:
             olt.show(
                 title="Info",
                 message="No drivers! Either add using the menu or change the file"
@@ -59,7 +75,7 @@ class Handler:
         car_repo = Repo(self.car_instance_list)
         response, car_list = car_repo.get(mode="all")
 
-        if response is "found" and len(car_list) is not 0:
+        if response == "found" and len(car_list) != 0:
             table_data = [["ID", "Registration", "Brand", "HP", "KMs"]]
             for car in car_list:
                 table_data.append([str(car.id), car.reg, car.brand, str(car.hp), str(car.kms)])
@@ -81,7 +97,7 @@ class Handler:
                     break
                 else:
                     continue
-        elif len(car_list) is 0:
+        elif len(car_list) == 0:
             olt.show(
                 title="Info",
                 message="No cars! Either add using the menu or change the file"
