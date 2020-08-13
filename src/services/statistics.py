@@ -4,17 +4,10 @@ class StatisticsService:
     """
     Class for statistics
 
-    Public methods:
-        Avrage age of drivers
-        Show drivers with no cars
-        Show cars with no drivers
-        Most popular car brand
-        Avrage car kilometers
-        Avrage car horsepower
-        Go back to previous men
+    Args:
+        car_instance_list (list): Car instance list
+        driver_instance_list (list): Dirver instance list 
     """
-    car_instance_list = []
-    driver_instance_list = []
     
     def __init__(self, car_instance_list: list, driver_instance_list: list):
         """
