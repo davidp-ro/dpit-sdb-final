@@ -8,18 +8,10 @@ class Handler:
         This class contains all the handler(printing to the console) functions for 
     the statistics menu
 
-    Methods:
-        avrage_age
-        oldest_youngest_driver
-        drivers_with_no_cars
-        cars_with_no_drivers
-        most_popular_brand
-        avrage_kms
-        avrage_hp
+    Args:
+        car_instance_list (list): Car instance list
+        driver_instance_list (list): Dirver instance list
     """
-    car_instance_list = []
-    driver_instance_list = []
-    statisticsService = None
         
     def __init__(self, car_instance_list: list, driver_instance_list: list):
         self.car_instance_list = car_instance_list
@@ -67,7 +59,7 @@ class Handler:
 
         message = f"The drivers that do not have a car associated are {drivers}" \
                   if drivers is not "" \
-                  else "All drivers have a car associated-"
+                  else "All drivers have a car associated -"
         
         olt.show(
             title="Drivers with no cars",
@@ -107,7 +99,7 @@ class Handler:
     def most_popular_brand(self):
         most_popular = self.statisticsService.most_popular_car_brand()
         
-        if most_popular != ():
+        if most_popular[1] != 0:
             olt.show(
                 title="Most popular car brand",
                 message=f"The most popular brand is {most_popular[0]} with {most_popular[1]} cars"

@@ -3,7 +3,7 @@
     {
       "id": 0,
       "name": "Marcel",
-      "age": 25,
+      "age": 46,
       "car_id": 0
     },
     {
@@ -14,9 +14,9 @@
     },
     {
       "id": 2,
-      "name": "Andreea",
-      "age": 41,
-      "car_id": 2
+      "name": "Adriana",
+      "age": 36,
+      "car_id": -1
     }
   ]
 }

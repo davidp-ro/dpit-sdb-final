@@ -2,31 +2,24 @@
   "cars": [
     {
       "id": 0,
-      "reg": "CJ15SOZ",
+      "reg": "CJ22FGH",
       "brand": "Volkswagen",
       "hp": 130,
       "kms": 88000
     },
     {
       "id": 1,
-      "reg": "CJ16SBB",
+      "reg": "CJ79IOP",
       "brand": "Chevrolet",
       "hp": 99,
       "kms": 135000
     },
     {
       "id": 2,
-      "reg": "CJ55OJK",
+      "reg": "CJ30JKL",
       "brand": "Hyundai",
       "hp": 145,
       "kms": 23522
-    },
-    {
-      "id": 3,
-      "reg": "B534JDK",
-      "brand": "Volvo",
-      "hp": 163,
-      "kms": 86322
     }
   ]
 }

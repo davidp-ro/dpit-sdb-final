@@ -3,7 +3,7 @@
     Entry point for the car/driver management app/project
   for the final task @ SDB - DPIT 2020
 
-    See README for more details
+    > See README for more details <
 ---------------------------------------------------------
 """
 __author__ = 'David Pescariu'

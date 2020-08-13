@@ -4,7 +4,15 @@ from models.car import Car
 from models.driver import Driver
 
 class Parser:
-    entity_repository = None
+    """
+    Class that is used to check the input data
+
+    Args:
+        entity_repository (Repo): The entity's repository
+
+    Example:
+        parser = Parser(car_repo)
+    """
 
     def __init__(self, entity_repository: Repo):
         self.entity_repository = entity_repository

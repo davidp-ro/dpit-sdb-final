@@ -1,13 +1,21 @@
+from typing import Tuple
 from ui.console_messages import warning, fail
 
 
 class Repo:
-    instance_list = []
-    
-    def __init__(self, instance_list: list):
+    """
+    Main repository Class - Deals with CRUD Ops for the entities
+
+    Args:
+        instance_list (list): The instance list for the respectiv enitity
+
+    Example:
+        repo = Repo(car_instance_list)
+    """
+    def __init__(self, instance_list: list) -> None:
         self.instance_list = instance_list
 
-    def get(self, mode: str = "all", entity_id: int = None) -> tuple:
+    def get(self, mode: str = "all", entity_id: int = None) -> Tuple[str, list or object]:
         """
         Get one or all(default) instance(s)
 
@@ -41,7 +49,7 @@ class Repo:
             return ("failed", None)
 
 
-    def add(self, entity: object) -> tuple:
+    def add(self, entity: object) -> Tuple[str, str]:
         """
         Add an entity
 
@@ -72,7 +80,7 @@ class Repo:
             return ("fail", "Something went wrong")
 
 
-    def delete(self, entity_id: int) -> tuple:
+    def delete(self, entity_id: int) -> Tuple[str, str]:
         """
         Deletes an entity
 
@@ -96,7 +104,7 @@ class Repo:
             return ("warn", "Not found, maybe already deleted")
 
 
-    def update(self, type_of_entity: str, entity_id: int, **kwargs) -> tuple:
+    def update(self, type_of_entity: str, entity_id: int, **kwargs) -> Tuple[str, str]:
         """
         Update an entity
 

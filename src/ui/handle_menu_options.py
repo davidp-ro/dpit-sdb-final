@@ -13,26 +13,16 @@ class Handler:
         This class contains all the handler(printing to the console) functions for 
     the main menu
 
-    Methods:
-        show_drivers
-        show_cars
-        add_driver
-        add_car
-        remove_driver
-        remove_car
-        update_driver
-        update_car
-        show_statistics_menu
-        show_about
+    Args:
+        car_instance_list (list): Car instance list
+        driver_instance_list (list): Dirver instance list
     """
-    car_instance_list = []
-    driver_instance_list = []
         
-    def __init__(self, car_instance_list: list, driver_instance_list: list):
+    def __init__(self, car_instance_list: list, driver_instance_list: list) -> None:
         self.car_instance_list = car_instance_list
         self.driver_instance_list = driver_instance_list
 
-    def show_drivers(self):
+    def show_drivers(self) -> None:
         driver_repo = Repo(self.driver_instance_list)
         response, driver_list = driver_repo.get(mode="all")
 
@@ -71,7 +61,7 @@ class Handler:
                 )
 
 
-    def show_cars(self):
+    def show_cars(self) -> None:
         car_repo = Repo(self.car_instance_list)
         response, car_list = car_repo.get(mode="all")
 
@@ -109,7 +99,7 @@ class Handler:
                 )
     
 
-    def add_driver(self):
+    def add_driver(self) -> None:
         console.clear_console()
         olt.show(
             title="Add a driver",
@@ -122,7 +112,7 @@ class Handler:
         add.handle_add_driver(driver_repo, parser, car_repo)
 
 
-    def add_car(self):
+    def add_car(self) -> None:
         console.clear_console()
         olt.show(
             title="Add a car",
@@ -133,7 +123,7 @@ class Handler:
         parser = Parser(car_repo)
         add.handle_add_car(car_repo, parser)
 
-    def remove_driver(self):
+    def remove_driver(self) -> None:
         console.clear_console()
         olt.show(
             title="Remove a driver",
@@ -144,7 +134,7 @@ class Handler:
         parser = Parser(driver_repo)
         remove.handle_remove_driver(driver_repo, parser)
 
-    def remove_car(self):
+    def remove_car(self) -> None:
         console.clear_console()
         olt.show(
             title="Remove a car",
@@ -155,7 +145,7 @@ class Handler:
         parser = Parser(car_repo)
         remove.handle_remove_car(car_repo, parser)
 
-    def update_driver(self):
+    def update_driver(self) -> None:
         console.clear_console()
         olt.show(
             title="Update a driver",
@@ -167,7 +157,7 @@ class Handler:
         car_repo = Repo(self.car_instance_list)
         update.handle_update_driver(driver_repo, parser, car_repo)
 
-    def update_car(self):
+    def update_car(self) -> None:
         console.clear_console()
         olt.show(
             title="Update a car",
@@ -178,14 +168,14 @@ class Handler:
         parser = Parser(car_repo)
         update.handle_update_car(car_repo, parser)
 
-    def show_statistics_menu(self):
+    def show_statistics_menu(self) -> None:
         statisticsMenu = StatisticsMenu(
             self.car_instance_list,
             self.driver_instance_list
         )
         statisticsMenu.show()
 
-    def show_about(self):
+    def show_about(self) -> None:
         olt.show(
             title="About",
             message="Made by David Pescariu for the final project within the SDB Course | <3 Academia Dpit | August 2020"

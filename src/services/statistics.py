@@ -37,6 +37,9 @@ class StatisticsService:
         Returns:
             float or int: avrage driver age
         """
+        if len(self.driver_instance_list) == 0:
+            return 0
+        
         age_sum = 0
         driver_num = 0
 
@@ -132,6 +135,9 @@ class StatisticsService:
         Returns:
             float or int: avrage car hp
         """
+        if len(self.car_instance_list) == 0:
+            return 0
+        
         hp_sum = 0
         car_num = 0
 
@@ -154,6 +160,9 @@ class StatisticsService:
         Returns:
             float or int: avrage car hp
         """
+        if len(self.car_instance_list) == 0:
+            return 0
+
         kms_sum = 0
         car_num = 0
 

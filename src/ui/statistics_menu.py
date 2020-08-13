@@ -8,15 +8,10 @@ class StatisticsMenu:
         This class contains the actual menu items that get printed and called for the
     statistics
 
-    Methods:
-        show: Show the menu
-    """
-    car_instance_list = []
-    driver_instance_list = []
-    handler = None
-    options_names = []
-    options = {}
-    
+    Args:
+        car_instance_list (list): Car instance list
+        driver_instance_list (list): Dirver instance list
+    """   
     def __init__(self, car_instance_list: list, driver_instance_list: list) -> None:
         self.car_instance_list = car_instance_list
         self.driver_instance_list = driver_instance_list
@@ -44,7 +39,10 @@ class StatisticsMenu:
             "7": self.handler.avrage_hp
         }
 
-    def show(self):
+    def show(self) -> None:
+        """
+        Show the menu
+        """
         option_table = SingleTable(self.options_names, title="Statistics")
         option_table.justify_columns = {
             0: "center",
@@ -60,7 +58,7 @@ class StatisticsMenu:
                 break
             else:
                 try:
-                    print("selected", selected)
+                    # React to option:
                     self.options[selected]()
                 except KeyError:
                     print("Invalid option!")

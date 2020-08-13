@@ -5,11 +5,13 @@ import ui.console_utils as console
 
 
 class Menu:
-    car_instance_list = []
-    driver_instance_list = []
-    handler = None
-    options_names = []
-    options = {}
+    """
+    Main Menu Class - Show options and react to chosen one
+
+    Args:
+        car_instance_list (list): Car instance list
+        driver_instance_list (list): Dirver instance list
+    """
     
     def __init__(self, car_instance_list: list, driver_instance_list: list):
         self.car_instance_list = car_instance_list
@@ -44,7 +46,10 @@ class Menu:
             "a": self.handler.show_about,
         }
 
-    def show_menu(self):
+    def show_menu(self) -> None:
+        """
+        Show the menu
+        """
         while True:
             console.clear_console()
             option_table = SingleTable(self.options_names, title="Main Menu")
@@ -59,6 +64,7 @@ class Menu:
                 quit()
             else:
                 try:
+                    # React to option
                     self.options[selected]()
                 except KeyError:
                     print("Invalid option!")
